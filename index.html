@@ -1,151 +1,21 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#102e2d">
-  <title>화림 FLOW · 회사 워크스페이스</title>
-  <link rel="icon" href="data:,">
-
-  <script>
-    window.FLOW_DEPLOYMENT = {
-      appsScriptUrl: "https://script.google.com/macros/s/AKfycbzkhpgehMI3Zj-v0IAbknj0fr93psRhQuI7nTkNpyn8exD-rtcXCjgtLXena44Anhbq/exec"
-    };
-  </script>
-
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #102e2d;
-      color: #f4efe5;
-      font-family: system-ui, 'Malgun Gothic', sans-serif;
-      line-height: 1.7;
-    }
-    main {
-      max-width: 760px;
-      margin: 10vh auto;
-      padding: 36px;
-    }
-    .brand {
-      color: #e7bd73;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 3px;
-    }
-    h1 {
-      font-size: clamp(32px, 6vw, 52px);
-      line-height: 1.3;
-      font-weight: 600;
-      margin: 48px 0 20px;
-    }
-    p {
-      color: #b5cac5;
-      font-size: 17px;
-    }
-    .button {
-      margin-top: 34px;
-      display: flex;
-      justify-content: space-between;
-      padding: 18px 24px;
-      background: #e7bd73;
-      color: #112d2c;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-    .button:focus-visible {
-      outline: 3px solid white;
-      outline-offset: 4px;
-    }
-    .notice {
-      margin: 32px 0;
-      padding: 24px;
-      border: 1px solid #e7bd73;
-      border-radius: 12px;
-    }
-    .foot {
-      border-top: 1px solid #39534e;
-      margin-top: 48px;
-      padding-top: 24px;
-      font-size: 14px;
-    }
-    [hidden] { display: none !important; }
-    @media (max-width: 600px) {
-      main {
-        margin: 5vh auto;
-        padding: 24px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102e2d">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>화림 FLOW · 프로젝트 관리</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#102e2d;color:#f4efe5;font-family:system-ui,'Malgun Gothic',sans-serif;line-height:1.7}main{max-width:760px;margin:10vh auto;padding:36px}.brand{color:#e7bd73;font-size:22px;font-weight:700;letter-spacing:3px}h1{font-size:clamp(32px,6vw,52px);line-height:1.3;font-weight:600;margin:48px 0 20px}p{color:#b5cac5;font-size:17px}.button{margin-top:34px;display:flex;justify-content:space-between;padding:18px 24px;background:#e7bd73;color:#112d2c;text-decoration:none;border-radius:10px;font-weight:700}.button:focus-visible{outline:3px solid white;outline-offset:4px}.notice{margin:32px 0;padding:24px;border:1px solid #e7bd73;border-radius:12px}.foot{border-top:1px solid #39534e;margin-top:48px;padding-top:24px;font-size:14px}@media(max-width:600px){main{margin:5vh auto;padding:24px}}
+</style>
 </head>
-
-<body>
-  <main>
-    <div class="brand">화림 FLOW</div>
-
-    <h1>프로젝트의 다음 단계가<br>선명해집니다.</h1>
-
-    <p>
-      자료 준비부터 검토·승인·최종 인계까지.<br>
-      회사 계정으로 팀의 진행 상황을 함께 확인하세요.
-    </p>
-
-    <a id="launch" class="button" target="_top" hidden>
-      회사 계정으로 화림 FLOW 열기
-      <span>→</span>
-    </a>
-
-    <div id="notice" class="notice" role="status">
-      공동 작업 앱의 배포 주소가 아직 설정되지 않았습니다.<br>
-      이 HTML 상단의 appsScriptUrl에 Apps Script 배포 주소를 넣어 주세요.
-    </div>
-
-    <noscript>
-      <p>브라우저에서 JavaScript를 허용한 뒤 다시 열어 주세요.</p>
-    </noscript>
-
-    <div class="foot">
-      <p>
-        등록된 회사 Google Workspace 계정으로 접근합니다.<br>
-        업무 자료와 승인 기록은 회사 Google Drive에 저장됩니다.
-      </p>
-    </div>
-  </main>
-
-  <script>
-    (function () {
-      'use strict';
-
-      var raw = window.FLOW_DEPLOYMENT &&
-                window.FLOW_DEPLOYMENT.appsScriptUrl;
-
-      if (!raw) return;
-
-      try {
-        var u = new URL(raw);
-
-        if (
-          u.protocol !== 'https:' ||
-          u.hostname !== 'script.google.com' ||
-          !/^\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(u.pathname) ||
-          u.search ||
-          u.hash ||
-          u.username ||
-          u.password
-        ) {
-          throw Error('invalid');
-        }
-
-        var a = document.getElementById('launch');
-        a.href = u.href;
-        a.hidden = false;
-        document.getElementById('notice').hidden = true;
-      } catch (e) {
-        document.getElementById('notice').textContent =
-          '배포 주소를 확인해 주세요. 이 HTML 상단 appsScriptUrl에는 Apps Script 웹앱의 /exec 주소를 넣습니다.';
-      }
-    })();
-  </script>
-</body>
-</html>
+<body><main>
+<div class="brand">화림 FLOW</div>
+<h1>프로젝트의 다음 단계가<br>선명해집니다.</h1>
+<p>자료 준비부터 검토·승인·최종 인계까지.<br>등록한 Google 계정으로 프로젝트의 진행 상황을 확인하세요.</p>
+<a id="launch" class="button" href="https://script.google.com/macros/s/AKfycbzkhpgehMI3Zj-v0IAbknj0fr93psRhQuI7nTkNpyn8exD-rtcXCjgtLXena44Anhbq/exec" target="_top">화림 FLOW 열기 <span aria-hidden="true">→</span></a>
+<div class="foot"><p>업무 자료와 승인 기록은 연결한 Google Drive에 저장됩니다.</p></div>
+</main></body></html>
